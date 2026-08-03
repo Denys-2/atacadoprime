@@ -83,8 +83,8 @@ function AuthPage() {
         />
 
         <Link to="/" className="relative flex items-center gap-3 font-semibold z-10">
-          <div className="w-11 h-11 rounded-xl grid place-items-center overflow-hidden border" style={{ background: "#ffffff", borderColor: "#e8e2d8" }}>
-            <img src="/brand-logo.png" alt="Prime" className="w-7 h-7 object-contain" />
+          <div className="w-11 h-11 rounded-full grid place-items-center overflow-hidden border shadow-sm" style={{ background: "#ffffff", borderColor: "#e8e2d8" }}>
+            <img src="/brand-logo.png" alt="Prime" className="w-7 h-7 object-contain rounded-full" />
           </div>
           <div className="leading-tight">
             <div className="uppercase tracking-[0.25em] text-[10px] text-[#8b7355]">B2B Platform</div>

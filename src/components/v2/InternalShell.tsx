@@ -235,7 +235,7 @@ export function V2InternalShell({ children, title, eyebrow = "Painel de comando"
 function ShellBrand({ compact = false }: { compact?: boolean }) {
   return (
     <div className={`flex items-center gap-3 ${compact ? "px-3 py-2.5" : "p-5"}`} style={compact ? undefined : { borderBottom: `1px solid ${V2.GRAPHITE}` }}>
-      <img src="/brand-logo.png" alt="Atacado Prime" className={compact ? "h-8 w-8 object-contain rounded-xl" : "h-10 w-10 object-contain rounded-xl"} />
+      <img src="/brand-logo.png" alt="Atacado Prime" className={compact ? "h-8 w-8 object-contain rounded-full" : "h-10 w-10 object-contain rounded-full"} />
       <div className="leading-tight">
         <div className={`font-semibold tracking-tight ${compact ? "text-sm" : "text-base"}`}>
           Atacado <span style={{ color: V2.TEAL }}>Prime</span>

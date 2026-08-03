@@ -208,7 +208,7 @@ export function AppShell({ children, title, description }: { children: ReactNode
       <aside className="hidden lg:flex w-[240px] flex-col bg-[#2b3a8c] text-white shrink-0 pt-[var(--app-safe-top)]">
         <div className="px-5 h-16 flex items-center">
           <Link to="/dashboard" className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-white/10 grid place-items-center overflow-hidden">
+            <div className="h-9 w-9 rounded-full bg-white/10 grid place-items-center overflow-hidden">
               <img src="/brand-logo.png" alt="Prime" className="h-6 w-6 object-contain" />
             </div>
             <div className="leading-tight">
@@ -248,7 +248,7 @@ export function AppShell({ children, title, description }: { children: ReactNode
           </VisuallyHidden>
           <div className="px-5 h-16 flex items-center">
             <div className="flex items-center gap-2.5">
-              <div className="h-9 w-9 rounded-xl bg-white/10 grid place-items-center overflow-hidden">
+              <div className="h-9 w-9 rounded-full bg-white/10 grid place-items-center overflow-hidden">
                 <img src="/brand-logo.png" alt="Prime" className="h-6 w-6 object-contain" />
               </div>
               <span className="font-display text-[15px] font-extrabold tracking-tight text-white">Atacado <span className="text-white/60">Prime</span></span>
