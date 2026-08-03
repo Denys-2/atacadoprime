@@ -1,0 +1,3 @@
+CREATE POLICY "Staff can upload push images" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'push-images' AND public.is_sales_staff(auth.uid()));
+CREATE POLICY "Staff can read push images" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'push-images' AND public.is_sales_staff(auth.uid()));
+CREATE POLICY "Staff can delete push images" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'push-images' AND public.is_sales_staff(auth.uid()));

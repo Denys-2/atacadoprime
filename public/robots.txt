@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /_authenticated
+Disallow: /api/
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /cart/
+Disallow: /vendas-offline
+Disallow: /offline-route
+
+Sitemap: https://primeautomotive.app/sitemap.xml

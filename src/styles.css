@@ -1,0 +1,490 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/inter";
+
+@custom-variant dark (&:is(.dark *));
+
+#lovable-badge {
+  display: none !important;
+}
+
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+
+/*
+ * Design system — Warm Sand (Clean ERP)
+ * Background: off-white warm. Foreground: deep warm brown. Brand: sand gold.
+ * Typography: Plus Jakarta Sans (display) · Inter (body).
+ */
+
+@theme inline {
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-soft: 0 1px 2px 0 rgb(61 43 31 / 0.04), 0 1px 3px 0 rgb(61 43 31 / 0.06);
+  --shadow-elevated: 0 8px 24px -8px rgb(61 43 31 / 0.10), 0 4px 10px -4px rgb(61 43 31 / 0.06);
+  --shadow-glow: 0 0 0 1px rgb(201 169 110 / 0.20), 0 8px 28px -10px rgb(201 169 110 / 0.35);
+}
+
+:root {
+  --radius: 0.75rem;
+  --app-safe-top: env(safe-area-inset-top, 0px);
+  --app-safe-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+
+  /* Surfaces — Warm Sand (#faf8f5 canvas, #ffffff cards) */
+  --background: oklch(0.98 0.01 80);              /* #faf8f5 */
+  --foreground: oklch(0.30 0.05 50);              /* #3d2b1f */
+  --card: oklch(1 0 0);                            /* #ffffff */
+  --card-foreground: oklch(0.30 0.05 50);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.30 0.05 50);
+
+  /* Brand — Sand Gold #c9a96e */
+  --primary: oklch(0.73 0.08 80);
+  --primary-foreground: oklch(0.25 0.05 50);
+
+  /* Neutrals */
+  --secondary: oklch(0.95 0.01 80);                /* #f5f0e8 */
+  --secondary-foreground: oklch(0.30 0.05 50);
+  --muted: oklch(0.95 0.01 80);
+  --muted-foreground: oklch(0.55 0.04 70);        /* #8b7355 */
+  --accent: oklch(0.73 0.08 80 / 0.14);           /* sand wash */
+  --accent-foreground: oklch(0.73 0.08 80);
+
+  /* Semantic */
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.65 0.17 150);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.78 0.16 80);
+  --warning-foreground: oklch(0.25 0.05 50);
+
+  /* Border / Input / Ring */
+  --border: oklch(0.91 0.01 80);                   /* #e8e2d8 */
+  --input: oklch(0.91 0.01 80);
+  --ring: oklch(0.73 0.08 80);
+
+  /* Sidebar */
+  --sidebar: oklch(0.95 0.01 80);
+  --sidebar-foreground: oklch(0.30 0.05 50);
+  --sidebar-primary: oklch(0.73 0.08 80);
+  --sidebar-primary-foreground: oklch(0.25 0.05 50);
+  --sidebar-accent: oklch(0.93 0.01 80);
+  --sidebar-accent-foreground: oklch(0.30 0.05 50);
+  --sidebar-border: oklch(0.91 0.01 80);
+  --sidebar-ring: oklch(0.73 0.08 80);
+}
+
+/* Dark variant mantida para componentes que usam `dark:` —
+   ainda warm, só com mais contraste para leitura noturna. */
+.dark {
+  --background: oklch(0.22 0.03 70);
+  --foreground: oklch(0.96 0.01 80);
+  --card: oklch(0.28 0.03 70);
+  --card-foreground: oklch(0.96 0.01 80);
+  --popover: oklch(0.28 0.03 70);
+  --popover-foreground: oklch(0.96 0.01 80);
+  --primary: oklch(0.73 0.08 80);
+  --primary-foreground: oklch(0.25 0.05 50);
+  --secondary: oklch(0.32 0.03 70);
+  --secondary-foreground: oklch(0.96 0.01 80);
+  --muted: oklch(0.32 0.03 70);
+  --muted-foreground: oklch(0.70 0.03 70);
+  --accent: oklch(0.73 0.08 80 / 0.14);
+  --accent-foreground: oklch(0.73 0.08 80);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.96 0.01 80);
+  --success: oklch(0.70 0.17 150);
+  --success-foreground: oklch(0.22 0.03 70);
+  --warning: oklch(0.80 0.16 80);
+  --warning-foreground: oklch(0.22 0.03 70);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.73 0.08 80);
+  --sidebar: oklch(0.24 0.03 70);
+  --sidebar-foreground: oklch(0.96 0.01 80);
+  --sidebar-primary: oklch(0.73 0.08 80);
+  --sidebar-primary-foreground: oklch(0.25 0.05 50);
+  --sidebar-accent: oklch(0.32 0.03 70 / 60%);
+  --sidebar-accent-foreground: oklch(0.96 0.01 80);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.73 0.08 80);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01", "ss03";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+}
+
+/* Utilitários reutilizáveis para o admin premium */
+@utility surface-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility surface-elevated {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
+}
+
+@utility focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-ring);
+}
+
+/* ====================================================================
+ * Warm Sand — Premium admin theme (light)
+ * Aplica-se a um wrapper .theme-midnight (escopado ao admin shell).
+ * Paleta: off-white warm, sand-gold accent, brown ink text.
+ * ==================================================================== */
+.theme-midnight {
+  --background: oklch(0.98 0.01 80);                /* #faf8f5 */
+  --foreground: oklch(0.30 0.05 50);                /* #3d2b1f */
+  --card: oklch(1 0 0);                              /* #ffffff */
+  --card-foreground: oklch(0.30 0.05 50);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.30 0.05 50);
+
+  --primary: oklch(0.73 0.08 80);                    /* Sand Gold #c9a96e */
+  --primary-foreground: oklch(0.25 0.05 50);
+
+  --secondary: oklch(0.95 0.01 80);                  /* #f5f0e8 */
+  --secondary-foreground: oklch(0.30 0.05 50);
+  --muted: oklch(0.95 0.01 80);
+  --muted-foreground: oklch(0.55 0.04 70);            /* #8b7355 */
+  --accent: oklch(0.73 0.08 80 / 0.14);
+  --accent-foreground: oklch(0.73 0.08 80);
+
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.65 0.17 150);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.78 0.16 80);
+  --warning-foreground: oklch(0.25 0.05 50);
+
+  --border: oklch(0.91 0.01 80);                     /* #e8e2d8 */
+  --input: oklch(0.91 0.01 80);
+  --ring: oklch(0.73 0.08 80);
+
+  --sidebar: oklch(0.95 0.01 80);
+  --sidebar-foreground: oklch(0.30 0.05 50);
+  --sidebar-primary: oklch(0.73 0.08 80);
+  --sidebar-primary-foreground: oklch(0.25 0.05 50);
+  --sidebar-accent: oklch(0.93 0.01 80);
+  --sidebar-accent-foreground: oklch(0.30 0.05 50);
+  --sidebar-border: oklch(0.91 0.01 80);
+  --sidebar-ring: oklch(0.73 0.08 80);
+
+  color-scheme: light;
+}
+
+.theme-midnight ::selection {
+  background: oklch(0.73 0.08 80 / 0.35);
+}
+
+/* Glow halo decorativo para áreas premium */
+@utility midnight-glow {
+  position: relative;
+  isolation: isolate;
+}
+@utility midnight-glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@utility btn-glow {
+  box-shadow: 0 0 0 1px oklch(0.73 0.08 80 / 0.4),
+              0 8px 24px -6px oklch(0.73 0.08 80 / 0.35);
+  &:hover {
+    box-shadow: 0 0 0 1px oklch(0.73 0.08 80 / 0.55),
+                0 10px 32px -6px oklch(0.73 0.08 80 / 0.45);
+  }
+}
+
+@utility status-dot-glow {
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* ====================================================================
+ * Card treatment global (admin) — aplica em TODOS os cards, painéis e
+ * containers com `bg-card`, dispensando bordas duras em qualquer página.
+ * ==================================================================== */
+.theme-midnight .bg-card,
+.theme-midnight [class*="bg-card"] {
+  background: oklch(1 0 0);
+  border-color: var(--color-border);
+  box-shadow: 0 1px 3px -1px rgb(61 43 31 / 0.06), 0 4px 12px -4px rgb(61 43 31 / 0.04);
+}
+
+/* Suavizar bordas padrão dentro do admin */
+.theme-midnight .border,
+.theme-midnight .border-border,
+.theme-midnight .border-input {
+  border-color: oklch(0.91 0.01 80);
+}
+
+/* Inputs/selects/textarea com fundo neutro */
+.theme-midnight input,
+.theme-midnight textarea,
+.theme-midnight select,
+.theme-midnight [role="combobox"] {
+  background-color: oklch(0.98 0.01 80);
+  border-color: oklch(0.91 0.01 80);
+}
+
+/* Tabelas: linhas com divisores suaves */
+.theme-midnight table {
+  border-color: oklch(0.91 0.01 80);
+}
+.theme-midnight thead tr,
+.theme-midnight tbody tr {
+  border-color: oklch(0.91 0.01 80);
+}
+
+/* ====================================================================
+ * Responsive baseline (v3)
+ * - Bloqueia scroll horizontal acidental em telas pequenas/tablets.
+ * - Fornece utilitários fluidos (clamp) que escalam de 360px→1440px
+ *   sem exigir novos breakpoints em cada componente.
+ * ==================================================================== */
+html,
+body {
+  overflow-x: clip;                    /* previne bleed horizontal (mapas, radares, hero) */
+  -webkit-text-size-adjust: 100%;      /* iOS: evita zoom automático de fonte */
+}
+@media (max-width: 1023px) {
+  /* Alvos de toque mínimos (WCAG 2.5.5 AAA) para superfícies interativas
+   * comuns. Só aplica em <lg para não alterar densidade do desktop. */
+  button, [role="button"], a.btn-touch { min-height: 44px; }
+}
+@utility text-fluid-hero {
+  /* 32px @ 360vw  →  56px @ 1440vw  */
+  font-size: clamp(2rem, 2rem + 2.2vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+@utility text-fluid-title {
+  font-size: clamp(1.25rem, 1.05rem + 1vw, 2rem);
+  line-height: 1.15;
+}
+@utility text-fluid-body {
+  font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.125rem);
+  line-height: 1.55;
+}
+@utility safe-x {
+  /* Padding lateral fluido: 16px em mobile → 40px em desktop */
+  padding-inline: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+}
+
+/* ====================================================================
+ * Hero headlight effect — feixe de farol laranja sobre a imagem hero
+ * ==================================================================== */
+@keyframes headlight-sweep {
+  0% {
+    transform: translateX(-30%) rotate(-18deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateX(30%) rotate(18deg);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateX(-30%) rotate(-18deg);
+    opacity: 0.35;
+  }
+}
+
+@utility hero-headlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: conic-gradient(
+    from 90deg at 20% 50%,
+    transparent 0deg,
+    oklch(0.66 0.22 33 / 0.18) 20deg,
+    oklch(0.66 0.22 33 / 0.45) 45deg,
+    oklch(0.66 0.22 33 / 0.18) 70deg,
+    transparent 100deg
+  );
+  filter: blur(40px);
+  transform-origin: 50% 100%;
+  animation: headlight-sweep 8s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+
+
+
+
+/* ===== POS: telas pequenas de maquininha (Sunmi/Gertec/PAX) ===== */
+.pos-root {
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
+@media (max-width: 420px), (max-height: 640px) {
+  .pos-root [role="dialog"] {
+    max-width: 96vw !important;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  .pos-root button,
+  .pos-root [role="button"] {
+    touch-action: manipulation;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Impressão em bobina térmica de 58mm via window.print() (RawBT / serviço de
+   impressão do Android). Envolva o cupom numa div class="cupom".
+   --------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: 58mm auto;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 58mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .cupom,
+  .cupom * {
+    visibility: visible;
+  }
+
+  .cupom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 54mm;
+    padding: 0 2mm;
+    font-family: 'Courier New', 'DejaVu Sans Mono', monospace;
+    font-size: 11px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #000;
+    overflow-wrap: break-word;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .cupom .titulo,
+  .cupom .xl {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 2mm;
+  }
+
+  .cupom .centro,
+  .cupom .center {
+    text-align: center;
+  }
+
+  .cupom .separador,
+  .cupom .hr {
+    border-top: 1px dashed #000;
+    margin: 1.5mm 0;
+  }
+
+  .cupom .linha,
+  .cupom .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 2mm;
+  }
+
+  .cupom .total,
+  .cupom .lg {
+    font-size: 14px;
+  }
+
+  .cupom::after {
+    content: '';
+    display: block;
+    height: 12mm;
+  }
+
+  .cupom * {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    text-shadow: none !important;
+  }
+}
+
+@media screen {
+  .cupom {
+    display: none;
+  }
+}

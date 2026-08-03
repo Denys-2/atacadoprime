@@ -1,0 +1,4 @@
+#Sun Aug 02 02:37:48 GMT 2026
+base.0=/dev-server/android-q2i/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

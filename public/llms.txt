@@ -1,0 +1,15 @@
+# Atacado Prime
+
+> Distribuidor B2B de chaves, capas e controles automotivos (Pósitron, Olimpus, Sistec, Hinor, Bravo e outras marcas) com preço de atacado para revendedores em todo o Brasil.
+
+Atacado Prime é uma plataforma de e-commerce e gestão para revendedores do setor automotivo, com sede em Uberlândia–MG. Oferecemos catálogo completo de acessórios automotivos, entrega rápida e atendimento exclusivo B2B.
+
+## Pages
+
+- [Home](/): Página inicial com destaques, categorias e ofertas para revendedores.
+- [Catálogo](/catalog): Catálogo completo de chaves, capas, controles, alarmes e acessórios automotivos com preço de atacado.
+- [Cadastro / Entrar](/auth): Cadastro de novos revendedores e login de clientes B2B.
+
+## Optional
+
+- [Recuperar senha](/reset-password): Fluxo de recuperação de senha para clientes cadastrados.

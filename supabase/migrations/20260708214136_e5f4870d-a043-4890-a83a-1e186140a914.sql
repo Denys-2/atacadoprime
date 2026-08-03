@@ -1,0 +1,1 @@
+ALTER TYPE public.payment_tipo ADD VALUE IF NOT EXISTS 'DINHEIRO';

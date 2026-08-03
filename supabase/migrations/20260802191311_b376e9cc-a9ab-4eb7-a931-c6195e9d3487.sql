@@ -1,0 +1,1 @@
+ALTER TABLE public.fechamentos ADD COLUMN IF NOT EXISTS taxas_periodo numeric DEFAULT 0;

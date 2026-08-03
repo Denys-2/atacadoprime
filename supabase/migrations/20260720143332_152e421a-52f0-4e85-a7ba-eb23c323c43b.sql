@@ -1,0 +1,1 @@
+UPDATE public.products SET tipo = 'controle' WHERE sku = 'CP-025';

@@ -1,0 +1,19 @@
+{
+  "name": "Prime Automotive — Portal B2B",
+  "short_name": "Prime Automotive",
+  "description": "Prime Automotive — plataforma B2B de chaves, capas e controles automotivos. Pedidos, CRM, financeiro e operações.",
+  "id": "/v3",
+  "start_url": "/v3",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/icon-192.png?v=3", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png?v=3", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512-maskable.png?v=3", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/apple-touch-icon.png?v=3", "sizes": "180x180", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,2 @@
+ALTER TABLE public.trips ADD COLUMN IF NOT EXISTS destinos jsonb NOT NULL DEFAULT '[]'::jsonb;
+COMMENT ON COLUMN public.trips.destinos IS 'Cidades adicionais da viagem: [{"cidade":"São José do Rio Preto","estado":"SP"}]';

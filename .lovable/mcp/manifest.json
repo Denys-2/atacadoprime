@@ -1,0 +1,566 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://lvhddybzpjrnwfltkiwo.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "atacado-prime-mcp",
+      "version": "0.1.0",
+      "title": "Atacado Prime"
+    },
+    "tools": [
+      {
+        "name": "vendas_resumo",
+        "title": "Resumo de vendas",
+        "description": "Resumo de vendas (todos os pedidos exceto cancelados) em um período: quantidade de pedidos, faturamento total, ticket médio, divisão por forma de pagamento e divisão por cidade do cliente.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "periodo": {
+              "type": "string",
+              "enum": [
+                "hoje",
+                "ontem",
+                "semana",
+                "mes",
+                "mes_passado",
+                "personalizado"
+              ],
+              "description": "Período das vendas."
+            },
+            "de": {
+              "description": "Data inicial YYYY-MM-DD (só para periodo=personalizado).",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ate": {
+              "description": "Data final YYYY-MM-DD (só para periodo=personalizado).",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "periodo"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "resultado_periodo",
+        "title": "Resultado do período",
+        "description": "Demonstrativo do período: faturamento, custo das peças vendidas, taxas de cartão, despesas de viagem e lucro líquido com margem.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "periodo": {
+              "type": "string",
+              "enum": [
+                "hoje",
+                "ontem",
+                "semana",
+                "mes",
+                "mes_passado",
+                "personalizado"
+              ],
+              "description": "Período do resultado."
+            },
+            "de": {
+              "description": "Data inicial YYYY-MM-DD (só para periodo=personalizado).",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ate": {
+              "description": "Data final YYYY-MM-DD (só para periodo=personalizado).",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "periodo"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "clientes_inativos",
+        "title": "Clientes sem comprar",
+        "description": "Lista clientes aprovados que estão há mais de N dias sem comprar, ordenados do mais tempo parado para o menos. Pode filtrar por cidade.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "dias": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991,
+              "description": "Mínimo de dias sem compra (ex.: 30)."
+            },
+            "cidade": {
+              "description": "Filtra por cidade do cliente.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "limite": {
+              "description": "Máximo de clientes retornados (padrão 20).",
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "dias"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "estoque_critico",
+        "title": "Estoque crítico",
+        "description": "Lista produtos ativos com estoque igual ou abaixo do estoque mínimo, com preço de venda, custo e margem.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "limite": {
+              "description": "Máximo de produtos retornados (padrão 30).",
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "busca": {
+              "description": "Filtra por nome ou SKU do produto.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "buscar_pedido",
+        "title": "Buscar pedido",
+        "description": "Busca pedidos pelo código curto (ex.: #JP1234) ou pelo nome do cliente, retornando itens, total, status e forma de pagamento.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "busca": {
+              "type": "string",
+              "description": "Código do pedido (#JP1234) ou nome do cliente."
+            },
+            "limite": {
+              "description": "Máximo de pedidos retornados (padrão 5).",
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "busca"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "contexto_despesa",
+        "title": "Opções para lançar despesa",
+        "description": "Lista as viagens abertas, as contas bancárias ativas e as categorias financeiras disponíveis. Use antes de `lancar_despesa` quando não souber em qual viagem ou conta lançar.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "lancar_despesa",
+        "title": "Lançar despesa",
+        "description": "Registra uma despesa no sistema. Existem TRÊS tipos: `viagem` (vinculada a uma viagem aberta), `empresa` (despesa operacional, debitada de uma conta bancária) e `particular` (financeiro pessoal do usuário). SEMPRE pergunte ao usuário se a despesa é de VIAGEM, EMPRESA ou PARTICULAR quando ele não deixar claro. IMPORTANTE: `valor` é SEMPRE dinheiro em reais (R$) — nunca litros, quantidade ou peso. Se o usuário JÁ informou tudo na mesma mensagem (tipo, valor em R$, descrição/categoria e — quando for viagem/empresa — viagem ou conta), pode chamar direto com `confirmado: true` e apenas relatar o que foi gravado. Se faltar qualquer informação, chame primeiro com `confirmado: false` para receber o resumo, pergunte o que falta e só então grave. Em `particular` a conta padrão é DENYS - C6BANK quando o usuário não disser outra. Use `contexto_despesa` para listar viagens, contas e categorias.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "tipo": {
+              "type": "string",
+              "enum": [
+                "viagem",
+                "empresa",
+                "particular"
+              ],
+              "description": "viagem = despesa de viagem; empresa = despesa operacional; particular = financeiro pessoal."
+            },
+            "valor": {
+              "type": "number",
+              "description": "Valor em REAIS (R$), positivo. Nunca litros ou quantidade."
+            },
+            "descricao": {
+              "type": "string",
+              "description": "Descrição curta da despesa."
+            },
+            "confirmado": {
+              "type": "boolean",
+              "description": "false = apenas simular e devolver o resumo para confirmação. true = gravar de verdade (só após o usuário confirmar)."
+            },
+            "data": {
+              "description": "Data YYYY-MM-DD. Padrão: hoje.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "categoria": {
+              "description": "Viagem: combustível, hospedagem, alimentação, pedágio, manutenção ou outros. Empresa: nome ou id da categoria financeira.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "viagem": {
+              "description": "Somente tipo=viagem: id ou nome/cidade da viagem.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "conta": {
+              "description": "Conta bancária (id ou nome). Obrigatória em tipo=empresa; opcional em tipo=viagem.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "forma_pagamento": {
+              "description": "pix, dinheiro ou cartão.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tipo",
+            "valor",
+            "descricao",
+            "confirmado"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "ajustar_despesa",
+        "title": "Corrigir ou apagar despesa",
+        "description": "Corrige (valor, descrição, categoria, forma de pagamento, conta, data) ou apaga uma despesa já lançada. Informe o `id` devolvido por `lancar_despesa` e o `tipo` (viagem, empresa ou particular). Use `acao: 'excluir'` para apagar. Confirme com o usuário antes de excluir.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id da despesa (retornado por lancar_despesa)."
+            },
+            "tipo": {
+              "type": "string",
+              "enum": [
+                "viagem",
+                "empresa",
+                "particular"
+              ],
+              "description": "Onde a despesa foi lançada."
+            },
+            "acao": {
+              "type": "string",
+              "enum": [
+                "atualizar",
+                "excluir"
+              ],
+              "description": "atualizar = alterar campos; excluir = apagar o lançamento."
+            },
+            "valor": {
+              "description": "Novo valor em REAIS.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "descricao": {
+              "description": "Nova descrição.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "categoria": {
+              "description": "Nova categoria.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "forma_pagamento": {
+              "description": "pix, dinheiro ou cartão (somente viagem).",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "conta": {
+              "description": "Nome ou id da conta bancária.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "data": {
+              "description": "Nova data YYYY-MM-DD.",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "tipo",
+            "acao"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "crm_leads",
+        "title": "Leads do CRM",
+        "description": "Consulta os chaveiros/leads do funil do CRM. Permite filtrar por etapa do kanban (ex.: NOVO_LEAD = coluna 'Novo lead'), por cidade/estado e mostrar apenas quem tem WhatsApp válido. Retorna a contagem total, o resumo por etapa e a lista com nome, cidade, WhatsApp e telefone.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "etapa": {
+              "description": "Coluna do kanban. Ex.: NOVO_LEAD para 'Novo lead'. Vazio = todas as etapas.",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "NOVO_LEAD",
+                    "CONTATO_FEITO",
+                    "NEGOCIACAO",
+                    "AGUARDANDO_RETORNO",
+                    "CLIENTE",
+                    "PERDIDO",
+                    "PEDIDO"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "cidade": {
+              "description": "Filtra por cidade (ex.: Brasília).",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "estado": {
+              "description": "Filtra por UF (ex.: DF).",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "somente_com_whatsapp": {
+              "description": "true = retorna apenas leads com WhatsApp preenchido e válido.",
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "limite": {
+              "description": "Máximo de leads listados (padrão 50).",
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

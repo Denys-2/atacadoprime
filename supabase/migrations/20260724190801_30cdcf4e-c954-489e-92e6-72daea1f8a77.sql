@@ -1,0 +1,2 @@
+ALTER TABLE public.bank_accounts ADD COLUMN IF NOT EXISTS incluir_saldo_total BOOLEAN NOT NULL DEFAULT TRUE;
+UPDATE public.bank_accounts SET incluir_saldo_total = FALSE WHERE nome IN ('DENYS - C6BANK','DENYS PESSOAL');
